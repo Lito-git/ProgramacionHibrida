@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" aria-label="Boton para regresar a la pagina de inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">configuracion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-item>
+    <ion-toggle [(ngModel)]="showRandomCita" (ionChange)="onToggleShowRandomCita()" justify="space-between"> Permitir eliminar citas en el inicio</ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-toggle [(ngModel)]="enabledDelete" (ionChange)="onToggleDelete()" justify="space-between"> Permitir eliminar citas en la gestion de citas</ion-toggle>
+  </ion-item>
+</ion-content>
