@@ -38,8 +38,9 @@ export class HomePage implements OnInit {
   }
 
   async ionViewWillEnter(): Promise<void> {
-    await this._loadRandomCita()
     await this.administracionService.iniciarPlugin()
+    await this._loadRandomCita()
+    
   }
 
   ngOnDestroy(): void {
