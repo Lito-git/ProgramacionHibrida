@@ -1,0 +1,70 @@
+<ion-card *ngFor="let p of publicacionesL">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col size="3" class="ion-text-center">
+        <img [src]="'data:image/jpeg;base64,' + p.imagen" height="75px" style="width: 100%; object-fit: cover;">
+      </ion-col>
+
+      <ion-col size="3" class="ion-text-center">
+        <ion-card-title>{{ p.titulo }}</ion-card-title>
+      </ion-col>
+
+      <ion-col size="3" class="ion-text-center">
+        <ion-card-subtitle>{{ p.fecha | date: 'yyyy-MM-dd' }}</ion-card-subtitle>
+      </ion-col>
+
+      <ion-col size="auto" class="ion-text-center">
+        <ion-button fill="clear" (click)="onClickDelete(p)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
+
+<ion-text *ngIf="publicacionesL?.length == 0" color="medium"> No hay publicaciones disponibles.</ion-text>
+
+<ion-modal [isOpen]="isModalDeleteOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title class="ion-text-center">Confirmación de Eliminación</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <ion-card>
+        <ion-card-content>
+          <ion-text color="medium" class="ion-text-center">
+            <p>¿Está seguro de que desea eliminar esta publicación?</p>
+          </ion-text>
+
+          <ion-grid>
+            <ion-row class="ion-margin-top">
+              <ion-col size="6" class="ion-text-left">
+                <ion-button (click)="confirmDelete()" expand="block" color="danger" aria-label="Botón para confirmar eliminación de publicación">
+                  Eliminar
+                </ion-button>
+              </ion-col>
+
+              <ion-col size="6" class="ion-text-right">
+                <ion-button (click)="setModalDeleteOpen(false)" expand="block" color="light" aria-label="Botón para cancelar eliminación de publicación">
+                  Cancelar
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-toast
+[isOpen]="showToast"
+message="Publicación eliminada exitosamente!"
+duration="2000"
+color="success"
+position="bottom" 
+(didDismiss)="showToast = false">
+</ion-toast>

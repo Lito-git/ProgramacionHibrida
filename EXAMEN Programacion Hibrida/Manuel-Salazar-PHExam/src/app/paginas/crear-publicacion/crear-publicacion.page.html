@@ -1,0 +1,68 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" aria-label="Boton para regresar a la pagina de inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Publicacion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input
+          [(ngModel)]="titulo"
+          [placeholder]="publicacionEjemplo.length > 0 ? publicacionEjemplo[0].titulo : 'Ingrese un titulo'"
+          required="required"
+          minlength="5"
+          type="text"
+          #tituloInput="ngModel"
+          labelPlacement="floating"
+          label="Titulo"
+          style="width: 100%; margin: 15px 0;">
+        </ion-input>
+        <ion-text [hidden]="tituloInput.valid || tituloInput.pristine" color="danger">Escriba un titulo de 5 o más letras! </ion-text>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button (click)="tomarFoto()" color="dark" class="ion-margin-top">
+          <ion-icon slot="start" name="camera-outline"></ion-icon>AGREGAR FOTO
+        </ion-button>
+      </ion-col>
+
+      <ion-col *ngIf="imagenBase64" size="6">
+        <ion-img [src]="'data:image/jpeg;base64,' + imagenBase64" style="height: 150px;"></ion-img>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-input
+          [(ngModel)]="descripcion"
+          [placeholder]="publicacionEjemplo.length > 0 ? publicacionEjemplo[0].descripcion : 'Ingrese descripcion'"
+          required="required"
+          minlength="20"
+          type="text"
+          #descripcionInput="ngModel"
+          labelPlacement="floating"
+          label="Descripcion">
+        </ion-input>
+        <ion-text [hidden]="descripcionInput.valid || descripcionInput.pristine" color="danger">Escriba una descripción de 20 o más letras! </ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-button (click)="onClickCreatePublicacion()" [disabled]="!tituloInput.valid || !descripcionInput.valid" aria-label="Botón para guardar publicación">GUARDAR</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+<ion-toast
+  [isOpen]="showToast"
+  message="Publicación guardada exitosamente!"
+  duration="2000"
+  color="success"
+  position="bottom"
+  (didDismiss)="showToast = false">
+</ion-toast>

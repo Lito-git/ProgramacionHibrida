@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      Publicaciones
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-publicaciones-list [publicacionesL]="publicacionesHome" (publicacionDelete)="onDeletePublicacion($event.id)" />
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button [routerLink]="['/crear-publicacion']" aria-label="Boton para ingresar a la creacion de publicaciones">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
